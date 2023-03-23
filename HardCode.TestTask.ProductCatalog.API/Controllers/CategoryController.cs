@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HardCode.TestTask.ProductCatalog.Service.Contracts;
+using HardCode.TestTask.ProductCatalog.Shared.DataTransferObjects;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HardCode.TestTask.ProductCatalog.Controllers;
 
@@ -6,11 +8,19 @@ namespace HardCode.TestTask.ProductCatalog.Controllers;
 [Route("[controller]")]
 public class CategoryController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetAll()
+    private readonly IServiceManager _serviceManager;
+
+    public CategoryController(IServiceManager serviceManager)
     {
-        throw new NotImplementedException();
+        _serviceManager = serviceManager;
     }
+
+    /// <summary>
+    /// Получение всех категорий
+    /// </summary>
+    /// <returns>Список категорий</returns>
+    [HttpGet]
+    public async Task<IEnumerable<CategoryDto>> GetAll() => await _serviceManager.CategoryService.GetAllAsync();
     
     [HttpPost]
     public IActionResult Add()

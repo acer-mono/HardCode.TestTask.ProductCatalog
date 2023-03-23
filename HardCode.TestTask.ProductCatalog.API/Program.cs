@@ -12,11 +12,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var connectionString = builder.Configuration.GetConnectionString("WebApiDatabase");
 builder.Services.AddDbContext<RepositoryContext>(options => options
-    .UseNpgsql(connectionString, builder =>
-        builder.MigrationsAssembly("HardCode.TestTask.ProductCatalog.Repository")));
+    .UseNpgsql(connectionString, npgsqlBuilder =>
+        npgsqlBuilder.MigrationsAssembly("HardCode.TestTask.ProductCatalog.Repository")));
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
