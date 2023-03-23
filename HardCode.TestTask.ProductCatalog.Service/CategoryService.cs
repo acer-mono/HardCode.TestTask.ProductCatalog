@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HardCode.TestTask.ProductCatalog.Contracts;
+using HardCode.TestTask.ProductCatalog.Entities.Exceptions;
 using HardCode.TestTask.ProductCatalog.Entities.Models;
 using HardCode.TestTask.ProductCatalog.Service.Contracts;
 using HardCode.TestTask.ProductCatalog.Shared.DataTransferObjects;
@@ -27,10 +28,9 @@ public sealed class CategoryService : ICategoryService
     public async Task<CategoryDto> GetByIdAsync(int id)
     {
         var category = await _repositoryManager.CategoryRepository.GetByIdAsync(id);
-        //Todo обработка исключений
         if (category == null)
         {
-            throw new Exception("Категория не найдена");
+            throw new CategoryNotFoundException();
         }
 
         return _mapper.Map<CategoryDto>(category);
@@ -51,8 +51,7 @@ public sealed class CategoryService : ICategoryService
             var attributeType = allowedAttributeTypes.FirstOrDefault(type => type.Name == attributeDto.Type);
             if (attributeType == null)
             {
-                //Todo обработка исключений
-                throw new Exception($"Тип атрибута с именем {attributeDto.Type} не найден");
+                throw new AttributeNotFoundException(attributeDto.Type);
             }
             
             attributes.Add(new Attribute
@@ -71,10 +70,9 @@ public sealed class CategoryService : ICategoryService
     public async Task RemoveAsync(int id)
     {
         var category = await _repositoryManager.CategoryRepository.GetByIdAsync(id);
-        //Todo обработка исключений
         if (category == null)
         {
-            throw new Exception("Категория не найдена");
+            throw new CategoryNotFoundException();
         }
         
         _repositoryManager.CategoryRepository.Remove(category);

@@ -1,10 +1,9 @@
-using System.Reflection;
 using HardCode.TestTask.ProductCatalog.Contracts;
+using HardCode.TestTask.ProductCatalog.Extensions;
 using HardCode.TestTask.ProductCatalog.Repository;
 using HardCode.TestTask.ProductCatalog.Service;
 using HardCode.TestTask.ProductCatalog.Service.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +30,8 @@ builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 var app = builder.Build();
+app.ConfigureExceptionHandler();
+
 // Практика не из лучших, используется в демонстрационных целях
 using (var scope = app.Services.CreateScope())
 {
