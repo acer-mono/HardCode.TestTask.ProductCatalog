@@ -40,28 +40,23 @@ public sealed class CategoryService : ICategoryService
     {
         var allowedAttributeTypes =
             await _repositoryManager.CategoryRepository.GetAllowedAttributeTypesAsync();
-        var category = new Category
-        {
-            Name = dto.Name
-        };
-        var attributes = new List<Attribute>();
+        var category = _mapper.Map<Category>(dto);
 
-        foreach (var attributeDto in dto.Attributes)
+        foreach (var attribute in dto.Attributes)
         {
-            var attributeType = allowedAttributeTypes.FirstOrDefault(type => type.Name == attributeDto.Type);
+            var attributeType = allowedAttributeTypes.FirstOrDefault(type => type.Name == attribute.Type);
             if (attributeType == null)
             {
-                throw new AttributeNotFoundException(attributeDto.Type);
+                throw new AttributeNotFoundException(attribute.Type);
             }
-            
-            attributes.Add(new Attribute
+
+            category.Attributes.Add(new Attribute
             {
-                Name = attributeDto.Name,
+                Name = attribute.Name,
                 Type = attributeType
             });
         }
 
-        category.Attributes = attributes;
         _repositoryManager.CategoryRepository.Add(category);
         await _repositoryManager.SaveAsync();
         return _mapper.Map<CategoryDto>(category);

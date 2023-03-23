@@ -23,7 +23,7 @@ public sealed class CategoryRepository : RepositoryBase<Category>, ICategoryRepo
             .ThenInclude(attribute => attribute.Type)
             .FirstOrDefaultAsync(category => category.Id == id);
 
-    public async Task<IEnumerable<AttributeType>> GetAllowedAttributeTypesAsync() =>
+    public async Task<List<AttributeType>> GetAllowedAttributeTypesAsync() =>
         await RepositoryContext.AttributeTypes.ToListAsync();
 
     public void Add(Category category) => Create(category);
