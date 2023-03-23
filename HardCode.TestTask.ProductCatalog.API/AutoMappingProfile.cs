@@ -9,11 +9,11 @@ public sealed class AutoMappingProfile : Profile
 {
     public AutoMappingProfile()
     {
+        CreateMap<AttributeType, AttributeTypeDto>();
         CreateMap<Attribute, AttributeDto>()
-            .ForMember(dest => dest.Category,
-                opt => opt.MapFrom(src => src.Category.Name))
             .ForMember(dest => dest.Type,
-                opt => opt.MapFrom(src => src.Type.Name));
+                opt =>
+                    opt.MapFrom(src => src.Type.Name));
         CreateMap<Category, CategoryDto>();
     }
 }

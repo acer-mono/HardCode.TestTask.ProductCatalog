@@ -5,4 +5,8 @@ namespace HardCode.TestTask.ProductCatalog.Contracts;
 public interface ICategoryRepository
 {
     Task<IEnumerable<Category>> GetAllAsync();
+    Task<Category?> GetByIdAsync(int id);
+    Task<IEnumerable<AttributeType>> GetAllowedAttributeTypesAsync();
+    void Add(Category category);
+    void Remove(Category category);
 }
