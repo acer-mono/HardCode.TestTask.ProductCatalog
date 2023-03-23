@@ -15,6 +15,9 @@ public class CategoryController : ControllerBase
         _serviceManager = serviceManager;
     }
     
+    /// <summary>
+    /// Получение доступных типов данных для атрибутов категорий (доступны: boolean, string, decimal, integer)
+    /// </summary>
     [HttpGet("attribute/types")]
     public async Task<IEnumerable<AttributeTypeDto>> GetAllowedAttributeTypes() =>
         await _serviceManager.CategoryService.GetAllowedAttributeTypes();
@@ -22,7 +25,6 @@ public class CategoryController : ControllerBase
     /// <summary>
     /// Получение всех категорий
     /// </summary>
-    /// <returns>Список категорий</returns>
     [HttpGet]
     public async Task<IEnumerable<CategoryDto>> GetAll() => await _serviceManager.CategoryService.GetAllAsync();
     
@@ -30,10 +32,13 @@ public class CategoryController : ControllerBase
     /// Получение информации о категории по ее идентификатору
     /// </summary>
     /// <param name="id">Идентификатор категории</param>
-    /// <returns>Подробная информация о категории</returns>
     [HttpGet("{id:int}", Name = "CategoryById")]
     public async Task<CategoryDto> GetById(int id) => await _serviceManager.CategoryService.GetByIdAsync(id);
     
+    /// <summary>
+    /// Создание новой категории
+    /// </summary>
+    /// <param name="dto">Параметры для создания категории</param>
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CategoryForCreationDto dto)
     {
@@ -41,6 +46,10 @@ public class CategoryController : ControllerBase
         return CreatedAtRoute("CategoryById", new { id = createdCategory.Id }, createdCategory);
     }
     
+    /// <summary>
+    /// Удаление существующей категории
+    /// </summary>
+    /// <param name="id">Идентификатор категории</param>
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> RemoveById(int id)
     {
