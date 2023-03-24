@@ -13,7 +13,8 @@ public sealed class AutoMappingProfile : Profile
         CreateMap<AttributeType, AttributeTypeDto>();
         CreateMap<Attribute, AttributeDto>()
             .ForPath(dest => dest.Type,
-                opt => opt.MapFrom(src => src.Type.Name));
+                opt =>
+                    opt.MapFrom(src => src.Type.Name));
         CreateMap<Category, CategoryDto>();
         CreateMap<CategoryForCreationDto, Category>()
             .ForMember(d => d.Attributes,
