@@ -4,6 +4,7 @@ using HardCode.TestTask.ProductCatalog.Entities.Exceptions;
 using HardCode.TestTask.ProductCatalog.Entities.Models;
 using HardCode.TestTask.ProductCatalog.Service.Contracts;
 using HardCode.TestTask.ProductCatalog.Shared.DataTransferObjects;
+using HardCode.TestTask.ProductCatalog.Shared.RequestFeatures;
 
 namespace HardCode.TestTask.ProductCatalog.Service;
 
@@ -48,5 +49,12 @@ public sealed class ProductService : IProductService
         }
 
         return _mapper.Map<ProductDto>(product);
+    }
+
+    public async Task<IEnumerable<ProductDto>> GetAll(ProductParameters parameters)
+    {
+        var products = await _repositoryManager.ProductRepository.GetAll(parameters.Name, parameters.Description, parameters.MinPrice,
+            parameters.MaxPrice, parameters.Category);
+        return _mapper.Map<IEnumerable<ProductDto>>(products);
     }
 }

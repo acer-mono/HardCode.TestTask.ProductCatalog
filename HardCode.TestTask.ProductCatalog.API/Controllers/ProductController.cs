@@ -1,5 +1,6 @@
 ﻿using HardCode.TestTask.ProductCatalog.Service.Contracts;
 using HardCode.TestTask.ProductCatalog.Shared.DataTransferObjects;
+using HardCode.TestTask.ProductCatalog.Shared.RequestFeatures;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HardCode.TestTask.ProductCatalog.Controllers;
@@ -14,13 +15,21 @@ public class ProductController : ControllerBase
     {
         _serviceManager = serviceManager;
     }
-    
+
+    /// <summary>
+    /// Поиск продуктов
+    /// </summary>
+    /// <param name="parameters">Параметры поиска и фильтрации</param>
+    /// <returns></returns>
     [HttpGet]
-    public async Task<IEnumerable<ProductDto>> GetAll()
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<IEnumerable<ProductDto>> GetAll([FromQuery] ProductParameters parameters) =>
+        await _serviceManager.ProductService.GetAll(parameters);
     
+    /// <summary>
+    /// Добавление нового продукта
+    /// </summary>
+    /// <param name="dto">Параметры</param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] ProductForCreationDto dto)
     {
@@ -28,6 +37,11 @@ public class ProductController : ControllerBase
         return CreatedAtRoute("ProductById", new { id = createdProduct.Id }, createdProduct);
     }
 
+    /// <summary>
+    /// Получение продукта по идентификатору
+    /// </summary>
+    /// <param name="id">Идентификатор</param>
+    /// <returns></returns>
     [HttpGet("{id:int}", Name = "ProductById")]
     public async Task<ProductDto> GetById(int id) =>
         await _serviceManager.ProductService.GetByIdAsync(id);
