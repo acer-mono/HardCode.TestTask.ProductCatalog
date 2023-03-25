@@ -53,8 +53,7 @@ public sealed class ProductService : IProductService
 
     public async Task<IEnumerable<ProductDto>> GetAll(ProductParameters parameters)
     {
-        var products = await _repositoryManager.ProductRepository.GetAll(parameters.Name, parameters.Description, parameters.MinPrice,
-            parameters.MaxPrice, parameters.Category);
+        var products = await _repositoryManager.ProductRepository.GetAll(parameters);
         return _mapper.Map<IEnumerable<ProductDto>>(products);
     }
 }

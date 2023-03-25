@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\HardCode.TestTask.ProductCatalog.Contracts\HardCode.TestTask.ProductCatalog.Contracts.csproj" />
       <ProjectReference Include="..\HardCode.TestTask.ProductCatalog.Entities\HardCode.TestTask.ProductCatalog.Entities.csproj" />
+      <ProjectReference Include="..\HardCode.TestTask.ProductCatalog.Shared\HardCode.TestTask.ProductCatalog.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
