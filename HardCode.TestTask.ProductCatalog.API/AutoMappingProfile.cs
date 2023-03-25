@@ -20,5 +20,13 @@ public sealed class AutoMappingProfile : Profile
             .ForMember(d => d.Attributes,
                 opt => opt.Ignore())
             .AfterMap((_, d) => d.Attributes = new List<Attribute>());
+        CreateMap<ProductForCreationDto, Product>()
+            .ForPath(dest => dest.Category,
+                opt => opt.Ignore());
+        CreateMap<ProductCategoryAttribute, ProductCategoryAttributeDto>()
+            .ForPath(dest => dest.Name,
+                opt =>
+                    opt.MapFrom(src => src.Attribute.Name));
+        CreateMap<Product, ProductDto>();
     }
 }
