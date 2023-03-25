@@ -3,7 +3,18 @@
 /// <summary>
 /// DTO для отображения категории
 /// </summary>
-/// <param name="Id">Идентификатор</param>
-/// <param name="Name">Имя</param>
-/// <param name="Attributes">Список атрибутов</param>
-public sealed record CategoryDto(int Id, string Name, IEnumerable<AttributeDto> Attributes);
+public sealed record CategoryDto
+{
+    /// <summary>
+    /// Идентификатор
+    /// </summary>
+    public int Id { get; set; }
+    /// <summary>
+    /// Имя
+    /// </summary>
+    public string Name { get; set; }
+    /// <summary>
+    /// Список атрибутов
+    /// </summary>
+    public IEnumerable<AttributeDto> Attributes { get; set; }
+}

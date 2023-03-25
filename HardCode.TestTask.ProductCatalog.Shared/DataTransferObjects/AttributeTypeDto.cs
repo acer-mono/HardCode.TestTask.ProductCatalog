@@ -3,6 +3,14 @@
 /// <summary>
 /// DTO для отображения типа атрибута. Список типов предопределен, создается при первой миграции.
 /// </summary>
-/// <param name="Id">Идентификатор</param>
-/// <param name="Name">Имя(boolean, decimal, integer, string)</param>
-public sealed record AttributeTypeDto(int Id, string Name);
+public sealed record AttributeTypeDto
+{
+    /// <summary>
+    /// Идентификатор
+    /// </summary>
+    public int Id { get; set; }
+    /// <summary>
+    /// Имя(boolean, decimal, integer, string)
+    /// </summary>
+    public string Name { get; set; }
+}

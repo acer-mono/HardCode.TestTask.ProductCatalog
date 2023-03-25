@@ -17,5 +17,6 @@ public sealed class ProductRepository : RepositoryBase<Product>, IProductReposit
             .Products
             .Include(product => product.Category)
             .Include(product => product.Attributes)
+            .ThenInclude(attribute => attribute.Attribute)
             .SingleOrDefaultAsync(product => product.Id == id);
 }

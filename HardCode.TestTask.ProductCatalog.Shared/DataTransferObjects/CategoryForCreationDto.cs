@@ -3,7 +3,7 @@
 /// <summary>
 /// DTO для создания категории
 /// </summary>
-public sealed class CategoryForCreationDto
+public sealed record CategoryForCreationDto
 {
     /// <summary>
     /// Название

@@ -3,7 +3,18 @@
 /// <summary>
 /// DTO для отображения атрибута
 /// </summary>
-/// <param name="Id">Идентификатор</param>
-/// <param name="Name">Имя</param>
-/// <param name="Type">Имя типа</param>
-public sealed record AttributeDto(int Id, string Name, string Type);
+public sealed record AttributeDto
+{
+    /// <summary>
+    /// Идентификатор
+    /// </summary>
+    public int Id { get; set; }
+    /// <summary>
+    /// Имя
+    /// </summary>
+    public string Name { get; set; }
+    /// <summary>
+    /// Название типа
+    /// </summary>
+    public string Type { get; set; }
+}

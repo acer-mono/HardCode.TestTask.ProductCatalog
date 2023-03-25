@@ -3,7 +3,7 @@
 /// <summary>
 /// DTO для создания атрибута категории
 /// </summary>
-public sealed class AttributeForCreationDto
+public sealed record AttributeForCreationDto
 {
     /// <summary>
     /// Название атрибута

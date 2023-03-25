@@ -3,7 +3,18 @@
 /// <summary>
 /// DTO для отображения значений дополнительных аттрибутов категории
 /// </summary>
-/// <param name="Id">Идентификатор</param>
-/// <param name="Name">Имя</param>
-/// <param name="Value">Значение</param>
-public sealed record ProductCategoryAttributeDto(int Id, string Name, string Value);
+public sealed record ProductCategoryAttributeDto
+{
+    /// <summary>
+    /// Идентификатор
+    /// </summary>
+    public int Id { get; set; }
+    /// <summary>
+    /// Имя
+    /// </summary>
+    public string Name { get; set; }
+    /// <summary>
+    /// Значение
+    /// </summary>
+    public string Value { get; set; }
+}

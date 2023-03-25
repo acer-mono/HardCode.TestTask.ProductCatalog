@@ -3,17 +3,35 @@
 /// <summary>
 /// DTO для отображения продукта
 /// </summary>
-/// <param name="Id">Идентификатор</param>
-/// <param name="Name">Название</param>
-/// <param name="Description">Описание</param>
-/// <param name="Price">Цена</param>
-/// <param name="Image">Изображение</param>
-/// <param name="CategoryId">Идентификатор категории</param>
-/// <param name="Attributes">Дополнительные поля категории товара</param>
-public sealed record ProductDto(int Id,
-    string Name,
-    string? Description,
-    decimal Price,
-    string? Image,
-    int CategoryId, 
-    IEnumerable<ProductCategoryAttributeDto> Attributes);
+public sealed record ProductDto
+{
+    /// <summary>
+    /// Идентификатор
+    /// </summary>
+    public int Id { get; set; }
+    /// <summary>
+    /// Название
+    /// </summary>
+    public string Name { get; set; }
+    /// <summary>
+    /// Описание
+    /// </summary>
+    public string? Description { get; set; }
+    /// <summary>
+    /// Цена
+    /// </summary>
+    public decimal Price { get; set; }
+    /// <summary>
+    /// Изображение
+    /// </summary>
+    public string? Image { get; set; }
+    /// <summary>
+    /// Идентификатор категории
+    /// </summary>
+    public int CategoryId { get; set; }
+    /// <summary>
+    /// Дополнительные поля категории товара
+    /// </summary>
+    public IEnumerable<ProductCategoryAttributeDto> Attributes { get; set; }
+    
+}

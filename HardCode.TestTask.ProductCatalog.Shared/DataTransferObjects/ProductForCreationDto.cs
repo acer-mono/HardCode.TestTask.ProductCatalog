@@ -3,7 +3,7 @@
 /// <summary>
 /// DTO для создания продукта
 /// </summary>
-public class ProductForCreationDto
+public sealed record ProductForCreationDto
 {
     /// <summary>
     /// Название
@@ -25,9 +25,8 @@ public class ProductForCreationDto
     /// Идентификатор категории
     /// </summary>
     public int CategoryId { get; set; }
-    //Todo: do attributes
     /// <summary>
     /// Дополнительные поля категории товара
     /// </summary>
-    //public IEnumerable<object> Attributes { get; set; }
+    public IEnumerable<ProductCategoryAttributeForCreationDto> Attributes { get; set; }
 }

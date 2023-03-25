@@ -26,11 +26,16 @@ public sealed class ProductService : IProductService
             throw new CategoryNotFoundException();
         }
 
+        if (dto.Attributes.Any(attribute =>
+                !category.Attributes.Select(categoryAttribute => categoryAttribute.Id).Contains(attribute.Id)))
+        {
+            throw new CategoryAttributeNotFoundException();
+        }
+
         var product = _mapper.Map<Product>(dto);
-        //Todo: маппинг дополнительных полей
         _repositoryManager.ProductRepository.Add(product);
         await _repositoryManager.SaveAsync();
-        
+
         return _mapper.Map<ProductDto>(product);
     }
 
@@ -41,7 +46,7 @@ public sealed class ProductService : IProductService
         {
             throw new ProductNotFoundException();
         }
-        
+
         return _mapper.Map<ProductDto>(product);
     }
 }
