@@ -17,19 +17,18 @@ public class ProductController : ControllerBase
     }
 
     /// <summary>
-    /// Поиск продуктов
+    /// Поиск продуктов (используется POST, т.к. из-за большого числа атрибутов может быть переполнение строки запроса)
     /// </summary>
     /// <param name="parameters">Параметры поиска и фильтрации</param>
-    /// <returns></returns>
-    [HttpGet]
-    public async Task<IEnumerable<ProductDto>> GetAll([FromQuery] ProductParameters parameters) =>
+    /// <returns>Список продуктов, соответствующих параметрам запроса</returns>
+    [HttpPost("all")]
+    public async Task<IEnumerable<ProductDto>> GetAll([FromBody] ProductParameters parameters) =>
         await _serviceManager.ProductService.GetAll(parameters);
     
     /// <summary>
     /// Добавление нового продукта
     /// </summary>
     /// <param name="dto">Параметры</param>
-    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] ProductForCreationDto dto)
     {
@@ -41,7 +40,7 @@ public class ProductController : ControllerBase
     /// Получение продукта по идентификатору
     /// </summary>
     /// <param name="id">Идентификатор</param>
-    /// <returns></returns>
+    /// <returns>Информация о продукте</returns>
     [HttpGet("{id:int}", Name = "ProductById")]
     public async Task<ProductDto> GetById(int id) =>
         await _serviceManager.ProductService.GetByIdAsync(id);

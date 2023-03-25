@@ -16,7 +16,10 @@ public sealed class AutoMappingProfile : Profile
                 opt =>
                     opt.MapFrom(src => src.Type.Name));
         CreateMap<Category, CategoryDto>();
-        CreateMap<CategoryForCreationDto, Category>();
+        CreateMap<CategoryForCreationDto, Category>()
+            .ForMember(d => d.Attributes,
+                opt => opt.Ignore())
+            .AfterMap((_, d) => d.Attributes = new List<Attribute>());
         CreateMap<ProductCategoryAttributeForCreationDto, ProductCategoryAttribute>()
             .ForPath(dest => dest.AttributeId,
                 opt =>

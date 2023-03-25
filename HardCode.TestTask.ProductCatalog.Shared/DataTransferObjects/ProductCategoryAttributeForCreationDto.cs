@@ -12,5 +12,5 @@ public sealed record ProductCategoryAttributeForCreationDto
     /// <summary>
     /// Значение атрибута
     /// </summary>
-    public object Value { get; set; }
+    public string Value { get; set; }
 }

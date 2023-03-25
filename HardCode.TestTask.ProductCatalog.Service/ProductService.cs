@@ -33,6 +33,20 @@ public sealed class ProductService : IProductService
             throw new CategoryAttributeNotFoundException();
         }
 
+        foreach (var dtoAttribute in dto.Attributes)
+        {
+            var categoryAttribute = category.Attributes.FirstOrDefault(a => a.Id == dtoAttribute.Id);
+            if (categoryAttribute == null)
+            {
+                throw new CategoryAttributeNotFoundException();
+            }
+
+            if (!categoryAttribute.ValidateValue(dtoAttribute.Value))
+            {
+                throw new IncompatibleCategoryAttributeTypeException();
+            }
+        }
+
         var product = _mapper.Map<Product>(dto);
         _repositoryManager.ProductRepository.Add(product);
         await _repositoryManager.SaveAsync();
